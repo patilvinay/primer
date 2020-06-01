@@ -1,0 +1,18 @@
+<html>
+<% vars= vars; files= imported.snippets%>
+<% let headerFile= '/_temp/header.html.ejs' %>
+<%= include(headerFile) %>
+
+<body id="page-top" class="index">
+    <% for(let i=0;i < files.length; i++)
+{ let file= '/_temp/'+files[i]+'.html.ejs' %>
+    <%= include(file) %>
+    <%}%>
+
+   
+
+    <h1> hello world</h1>
+
+</body>
+
+</html>

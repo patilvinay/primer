@@ -1,0 +1,10 @@
+kalpa:
+  vars:
+    snippets:
+      - box
+      - box-shadow
+      - toasts
+      - bread-crumbs
+      - header-link
+      - navigation
+      - menu

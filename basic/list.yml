@@ -1,0 +1,42 @@
+kalpa:
+  vars:
+    files:
+      - alerts
+      - autocomplete
+      - alerts
+      - autocomplete
+      - avatars
+      - base
+      - blankslate
+      - box
+      - branch-name
+      - breadcrumb
+      - buttons
+      - core
+      - dropdown
+      - forms
+      - header
+      - labels
+      - layout
+      - loaders
+      - markdown
+      - marketing-buttons
+      - marketing
+      - marketing-support
+      - marketing-type
+      - marketing-utilities
+      - navigation
+      - pagination
+      - popover
+      - primer
+      - product
+      - progress
+      - select-menu
+      - subhead
+      - support
+      - table-object
+      - timeline
+      - toasts
+      - tooltips
+      - truncate
+      - utilities

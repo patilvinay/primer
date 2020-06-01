@@ -1,0 +1,60 @@
+kalpa:
+  import:
+    snippets:
+      file: list.yml
+      ref: vars.snippets
+      directory: ./
+  vars:
+    outDir: "{{ env.PWD }}/www"
+    tempDir: "{{ env.PWD }}/_temp"
+    templateDir: "{{ env.PWD }}/src/templates"
+    site:
+      title: Kalpa docs
+      description: Documentation for kalpa
+
+  play:
+    ########################################### create snippets #######################
+    - name: render snippet pug file for {{<item >}}
+      kalpa-pug:
+        template: "{{vars.templateDir}}/{{< item >}}.pug"
+        dest: "{{vars.tempDir}}/{{< item >}}.html.ejs"
+      loop: "{{- imported.snippets|dump -}}"
+
+    ############################################# create header #######################
+    - name: Create header template
+      kalpa-pug:
+        template: "{{vars.templateDir}}/{{< item >}}.pug"
+        dest: "{{vars.tempDir}}/{{< item >}}.html.ejs"
+      loop:
+        - header
+
+    #############################################create index.html#######################
+    - name: Create index
+      kalpa-ejs:
+        vars:
+          dest: "{{vars.outDir}}/{{< item >}}.html"
+          template: "{{vars.templateDir}}/{{< item >}}.html"
+      loop:
+        - index
+    ###############################################################################
+    - name: Html correction
+      kalpa-execa:
+        cmd: sed
+        opts:
+          - -i
+          - "{{< item | safe >}}"
+          - "{{vars.outDir}}/index.html"
+      debug:
+        - Html correction {{< item | safe >}}
+      loop:
+        - 's/&#34;/\"/g'
+        - "s/&lt;/</g"
+        - "s/&gt;/>/g"
+        - "s/&#39;/'/g"
+        - "s/&amp;apos;/`/g"
+        - "s/amp;copy;/copy/g"
+        - "s/&amp;gt;/>/g"
+        - "s/&amp;lt;/</g"
+        - 's/&amp;quot;/\"/g'
+#         <% files= imported.snippets;
+#
