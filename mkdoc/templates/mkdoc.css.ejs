@@ -1,0 +1,5 @@
+<% files= imported.files;
+for(let i=0;i < files.length; i++)
+{ let file= '/dist/'+files[i]+'.css' %>
+<%= include(file) %>
+<%}%>

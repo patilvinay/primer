@@ -5,7 +5,7 @@ kalpa:
       ref: vars.snippets
       directory: ./
   vars:
-    outDir: "{{ env.PWD }}/www"
+    outDir: "{{ env.PWD }}/../demo-hosting"
     tempDir: "{{ env.PWD }}/_temp"
     templateDir: "{{ env.PWD }}/src/templates"
     site:
@@ -29,7 +29,7 @@ kalpa:
         - header
 
     #############################################create index.html#######################
-    - name: Create index
+    - name: Create index {{vars.outDir}}/{{< item >}}.html
       kalpa-ejs:
         vars:
           dest: "{{vars.outDir}}/{{< item >}}.html"

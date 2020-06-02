@@ -1,0 +1,34 @@
+kalpa:
+  import:
+    files:
+      ref: vars.files
+      file: list.yml
+      directory: ./
+  vars:
+    this: mkdoc
+    templateDir: "{{ env.PWD }}/{{vars.this}}/templates"
+    outDir: "{{ env.PWD }}/mkdoc/www"
+    finalCss: mkdoc.css #<---
+
+  play:
+    - name: make dir {{< item >}}
+      kalpa-file:
+        action: mkdir
+        dir: "{{env.PWD}}/www/css/{{< item >}}"
+      loop:
+        - css
+
+    - name: Generating Css {{< item >}} # This Creates final css
+      kalpa-ejs:
+        vars:
+          dest: "{{vars.outDir}}/css/{{< item >}}"
+          template: "{{vars.templateDir}}/{{< item >}}.ejs"
+      loop:
+        - "{{ vars.finalCss }}"
+    # - name: Create style sheet
+    #   kalpa-ejs:
+    #     vars:
+    #       dest: "{{vars.outDir}}/css/{{< item >}}"
+    #       template: "{{vars.templateDir}}/{{< item >}}.ejs"
+    #   loop:
+    #     - "{{ vars.finalCss }}"
